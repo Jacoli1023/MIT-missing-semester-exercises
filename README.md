@@ -4,4 +4,5 @@ These are my solutions to the exercises from the MIT course [The Missing Semeste
 I use Linux Ubuntu 24.04 LTS.
 
 ## Contents
-[1. Course overview + the shell](./Lecture1)
+[1. Course overview + the shell](./Lecture1/Lecture1.md)
+[2. Shell Tools and Scripting](./Lecture2/Lecture2.md)
