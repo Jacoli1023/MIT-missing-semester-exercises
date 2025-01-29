@@ -10,6 +10,7 @@
     something like `/bin/bash` or `/usr/bin/zsh`, that means you're running the
     right program.**
 
+    Solution:
     ```bash
     $ echo $SHELL
     /bin/bash
@@ -18,6 +19,7 @@
     ---
  1. **Create a new directory called `missing` under `/tmp`.**
 
+    Solution:
     ```bash
     mkdir /tmp/missing
     ```
@@ -25,6 +27,7 @@
     ---
  1. **Look up the `touch` program. The `man` program is your friend.**
 
+    Solution:
     ```bash
     man touch
     ```
@@ -32,6 +35,7 @@
     ---
  1. **Use `touch` to create a new file called `semester` in `missing`.**
 
+    Solution:
     ```bash
     touch /tmp/missing/semester
     ```
@@ -49,6 +53,7 @@
     [quoting](https://www.gnu.org/software/bash/manual/html_node/Quoting.html)
     manual page for more information.**
 
+    Solution:
     ```bash
     $ echo '#!/bin/sh' > /tmp/missing/semester
     $ echo 'curl --head --silent https://missing.csail.mit.edu' >> /tmp/missing/semester
@@ -60,6 +65,7 @@
     consulting the output of `ls` (hint: look at the permission bits of the
     file).**
 
+    Solution:
     ```bash
     $ ./semester
     -bash: ./semester: Permission denied
@@ -72,11 +78,13 @@
     the file `semester` as the first argument, i.e. `sh semester`. Why does
     this work, while `./semester` didn't?**
 
+    Solution:
     This works because sh is a POSIX-compliant command interpreter. Rather than trying to execute the file, `sh` simply interprets the file given as an argument - in this case our `semester` file.
 
     ---
  1. **Look up the `chmod` program (e.g. use `man chmod`).**
 
+    Solution:
     ```bash
     man chmod
     ```
@@ -88,6 +96,7 @@
     [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) line for more
     information.**
 
+    Solution:
     ```bash
     chmod u+x ./semester
     ```
@@ -99,6 +108,7 @@
     `semester` into a file called `last-modified.txt` in your home
     directory.**
 
+    Solution:
     ```bash
     # using regex
     ./semester | grep "last-modified" > ~/last-modified.txt
@@ -108,6 +118,7 @@
  1. **Write a command that reads out your laptop battery's power level or your
     desktop machine's CPU temperature from `/sys`.**
 
+    Solution:
     ```bash
     $ cat /sys/class/power_supply/BAT1/capacity
     47
