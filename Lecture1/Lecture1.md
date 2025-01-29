@@ -15,30 +15,34 @@
     /bin/bash
     ```
 
+    ---
  1. **Create a new directory called `missing` under `/tmp`.**
 
     ```bash
     mkdir /tmp/missing
     ```
 
+    ---
  1. **Look up the `touch` program. The `man` program is your friend.**
 
     ```bash
     man touch
     ```
 
+    ---
  1. **Use `touch` to create a new file called `semester` in `missing`.**
 
     ```bash
     touch /tmp/missing/semester
     ```
 
- 1. **Write the following into that file, one line at a time:
+    ---
+ 1. **Write the following into that file, one line at a time:**
     ```
     #!/bin/sh
     curl --head --silent https://missing.csail.mit.edu
     ```
-    The first line might be tricky to get working. It's helpful to know that
+    **The first line might be tricky to get working. It's helpful to know that
     `#` starts a comment in Bash, and `!` has a special meaning even within
     double-quoted (`"`) strings. Bash treats single-quoted strings (`'`)
     differently: they will do the trick in this case. See the Bash
@@ -50,6 +54,7 @@
     $ echo 'curl --head --silent https://missing.csail.mit.edu' >> /tmp/missing/semester
     ```
 
+    ---
  1. **Try to execute the file, i.e. type the path to the script (`./semester`)
     into your shell and press enter. Understand why it doesn't work by
     consulting the output of `ls` (hint: look at the permission bits of the
@@ -62,18 +67,21 @@
 
     Execution fails because we do not have execution privileges. If we type `ls -l` in the shell, we see that the semester file has the following permission bits set: `-rw-rw-r--`. Thus we, as the owner of the file, can only read from and write to the file, not execute.
 
+    ---
  1. **Run the command by explicitly starting the `sh` interpreter, and giving it
     the file `semester` as the first argument, i.e. `sh semester`. Why does
     this work, while `./semester` didn't?**
 
     This works because sh is a POSIX-compliant command interpreter. Rather than trying to execute the file, `sh` simply interprets the file given as an argument - in this case our `semester` file.
 
+    ---
  1. **Look up the `chmod` program (e.g. use `man chmod`).**
 
     ```bash
     man chmod
     ```
 
+    ---
  1. **Use `chmod` to make it possible to run the command `./semester` rather than
     having to type `sh semester`. How does your shell know that the file is
     supposed to be interpreted using `sh`? See this page on the
@@ -86,6 +94,7 @@
 
     The shell knows to interpret the file using `sh` because of the shebang we included at the top of the file. Shebangs tell bash which interpreter to use.
 
+    ---
  1. **Use `|` and `>` to write the "last modified" date output by
     `semester` into a file called `last-modified.txt` in your home
     directory.**
@@ -95,6 +104,7 @@
     ./semester | grep "last-modified" > ~/last-modified.txt
     ```
 
+    ---
  1. **Write a command that reads out your laptop battery's power level or your
     desktop machine's CPU temperature from `/sys`.**
 
