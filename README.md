@@ -6,3 +6,4 @@ I use Linux Ubuntu 24.04 LTS.
 ## Contents
 [1. Course overview + the shell](./Lecture1/Lecture1.md)\
 [2. Shell Tools and Scripting](./Lecture2/Lecture2.md)\
+[3. Editors (Vim)](./Lecture3/Lecture3.md)
