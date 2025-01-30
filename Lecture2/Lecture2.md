@@ -1,14 +1,14 @@
 # Lecture 2: [Shell Tools and Scripting](https://missing.csail.mit.edu/2020/shell-tools/)
 
 
-1. **Read [`man ls`](https://www.man7.org/linux/man-pages/man1/ls.1.html) and write an `ls` command that lists files in the following manner
+1. **Read [`man ls`](https://www.man7.org/linux/man-pages/man1/ls.1.html) and write an `ls` command that lists files in the following manner**
 
-    - Includes all files, including hidden files
-    - Sizes are listed in human readable format (e.g. 454M instead of 454279954)
-    - Files are ordered by recency
-    - Output is colorized
+    - **Includes all files, including hidden files**
+    - **Sizes are listed in human readable format (e.g. 454M instead of 454279954)**
+    - **Files are ordered by recency**
+    - **Output is colorized**
 
-    A sample output would look like this**
+    **A sample output would look like this**
 
     ```
     -rw-r--r--   1 user group 1.1M Jan 14 09:53 baz
@@ -99,4 +99,4 @@ For example `ls | xargs rm` will delete the files in the current directory.**
     find . -type f -exec stat -c '%Y :%y %n' {} \; | sort -nr | cut -d: -f2- | head
     ```
 
-    If you want to supply a certain directory to search from rather than the present working directory, replace the '.' after find with the directory you wish to search from.
+    If you want to supply a certain directory to search from rather than searching the present working directory, replace the '.' after `find` with the directory you wish to search from.
