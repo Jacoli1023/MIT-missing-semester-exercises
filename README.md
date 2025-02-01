@@ -8,4 +8,5 @@ I use Linux Ubuntu 24.04 LTS.
 [2. Shell Tools and Scripting](./Lecture2/Lecture2.md)\
 [3. Editors (Vim)](./Lecture3/Lecture3.md)\
 [4. Data Wrangling](./Lecture4/Lecture4.md)\
-[5. Command-line Environment](./Lecture5/Lecture5.md)
+[5. Command-line Environment](./Lecture5/Lecture5.md)\
+[6. Version Control (Git)](./Lecture6/Lecture6.md)
