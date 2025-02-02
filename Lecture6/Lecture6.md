@@ -36,9 +36,7 @@ class website](https://github.com/missing-semester/missing-semester).**
 
        Solution:
        ```bash
-       $ git blame _config.yml | grep collections: | awk '{print $1}' | xargs \
-       git show --oneline 2>/dev/null | head -n1 | sed -E \
-       's/^\s*([a-zA-Z0-9]+) (.*)/\2/'
+       $ git blame _config.yml | grep collections: | awk '{print $1}' | xargs git show --oneline 2>/dev/null | head -n1 | sed -E 's/^\s*([a-zA-Z0-9]+) (.*)/\2/'
        Redo lectures as a collection
        ```
 
@@ -76,7 +74,8 @@ class website](https://github.com/missing-semester/missing-semester).**
 
    Solution:\
    `git stash` - Stash the changes in a dirty working directory away\
-   `git stash pop` - Remove a single stashed state from the stash list and apply it on top of the current working tree state\
+   `git stash pop` - Remove a single stashed state from the stash list and apply it on top of the current working tree state
+
    When we look at `git log`, what we see is is a hash id followed by `(refs/stash) WIP on master:` and another hash id and commit message of the last working commit (usually where the `HEAD` pointer is at). Thus `git stash` can be useful in the scenario where we've made some changes to a file or directory, but aren't quite ready to commit those changes. Thus we can `git stash` them for a bit while we work on something else (i.e. more demanding bug fixes), and then when we're ready we can `git stash pop` to get our work back.
 
    ---
