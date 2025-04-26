@@ -13,7 +13,7 @@
     ---
 1. **Do [this](https://github.com/spiside/pdb-tutorial) hands on `pdb` tutorial to familiarize yourself with the commands. For a more in depth tutorial read [this](https://realpython.com/python-debugging-pdb).**
 
----
+    ---
 1. **Install [`shellcheck`](https://www.shellcheck.net/) and try checking the following script. What is wrong with the code? Fix it. Install a linter plugin in your editor so you can get your warnings automatically.**
 
    ```bash
@@ -34,7 +34,6 @@
     After fixing those issues, our fixed solution looks like [`fixed_example.sh`](./fixed_example.sh).
 
     ---
-
 1. **(Advanced) Read about [reversible debugging](https://undo.io/resources/reverse-debugging-whitepaper/) and get a simple example working using [`rr`](https://rr-project.org/) or [`RevPDB`](https://morepypy.blogspot.com/2016/07/reverse-debugging-for-python.html).**
 
 ---
@@ -47,18 +46,20 @@
 
     ```bash
     $ python -m cProfile -s cumtime sorts.py | grep -e sorts.py -e cumtime
-    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-         1    0.000    0.000    0.261    0.261 sorts.py:1(<module>)
-         3    0.020    0.007    0.260    0.087 sorts.py:4(test_sorted)
-33914/1000    0.032    0.000    0.035    0.000 sorts.py:23(quicksort)
-34178/1000    0.025    0.000    0.029    0.000 sorts.py:32(quicksort_inplace)
-      1000    0.012    0.000    0.012    0.000 sorts.py:11(insertionsort)
+
+        ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+             1    0.000    0.000    0.261    0.261 sorts.py:1(<module>)
+             3    0.020    0.007    0.260    0.087 sorts.py:4(test_sorted)
+    33914/1000    0.032    0.000    0.035    0.000 sorts.py:23(quicksort)
+    34178/1000    0.025    0.000    0.029    0.000 sorts.py:32(quicksort_inplace)
+          1000    0.012    0.000    0.012    0.000 sorts.py:11(insertionsort)
     ```
 
     - Next, using line_profiler. We'll have to add the `@profile` tags before the insertion sort and quicksort function definitions.
 
     ```bash
     $ kernprof -l -v sorts.py
+
     Total time: 0.137286 s
     File: sorts.py
     Function: insertionsort at line 11
