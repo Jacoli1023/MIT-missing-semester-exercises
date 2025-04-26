@@ -1,0 +1,36 @@
+Wrote profile results to sorts.py.lprof
+Timer unit: 1e-06 s
+
+Total time: 0.137286 s
+File: sorts.py
+Function: insertionsort at line 11
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    11                                           @profile
+    12                                           def insertionsort(array):
+    13                                           
+    14     26254       4637.9      0.2      3.4      for i in range(len(array)):
+    15     25254       3951.3      0.2      2.9          j = i-1
+    16     25254       4654.4      0.2      3.4          v = array[i]
+    17    231199      50115.6      0.2     36.5          while j >= 0 and v < array[j]:
+    18    205945      37184.6      0.2     27.1              array[j+1] = array[j]
+    19    205945      31532.5      0.2     23.0              j -= 1
+    20     25254       4798.5      0.2      3.5          array[j+1] = v
+    21      1000        411.6      0.4      0.3      return array
+
+Total time: 0.101222 s
+File: sorts.py
+Function: quicksort at line 23
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    23                                           @profile
+    24                                           def quicksort(array):
+    25     33420       9496.4      0.3      9.4      if len(array) <= 1:
+    26     17210       4011.4      0.2      4.0          return array
+    27     16210       2970.5      0.2      2.9      pivot = array[0]
+    28    123504      33547.3      0.3     33.1      left = [i for i in array[1:] if i < pivot]
+    29    123504      32987.4      0.3     32.6      right = [i for i in array[1:] if i >= pivot]
+    30     16210      18208.7      1.1     18.0      return quicksort(left) + [pivot] + quicksort(right)
+
