@@ -95,6 +95,69 @@
         30     16210      18208.7      1.1     18.0      return quicksort(left) + [pivot] + quicksort(right)
     ```
 
-    From the data, we see that insertion sort is slower than quicksort, with runtimes of 0.137s and 0.101s, respectively. The majority of the time spent in insertion sort was in the conditional of the while loop, whereas the majority of the time spent in quicksort was the assignment of the `left` and `right` variables, which makes sense because this line has assignment, iteration, and a conditional all packaged into one line.
+    From the data, we see that insertion sort is slower than quicksort, with runtimes of 0.137s and 0.101s, respectively. The majority of the time spent in insertion sort was in the while loop, whereas the majority of the time spent in quicksort were the assignments of the `left` and `right` variables. This is likely due to the fact these lines have assignment, iteration, and a conditional all packaged into a single line.
 
-    - 
+    - The memory profiler did not seem to work for me, as after decorating with `@profile` tags and importing the profile module, it would then get stuck in some sort of infinite loop. However, I would guess that the quicksort uses more memory than the insertion sort, due to the amount of recursive calls it makes, thus demanding more of the stack than insertion sort.
+
+    - Now for the challenge of using `perf` to look at cycle counts and cache hits and misses of each alogirthm. For this, I will modify the `sorts.py` program to only run one algorithm at a time, and then record the stats for those. First, we'll do quicksort:
+
+    ```bash
+    $ sudo perf stat -e cpu-cycles,cache-misses,cache-references python sorts.py
+    
+    Performance counter stats for 'python sorts.py':
+
+        75,791,961      cpu_atom/cpu-cycles/                                                    (16.16%)
+       113,268,526      cpu_core/cpu-cycles/                                                    (83.84%)
+           630,818      cpu_atom/cache-misses/           #   65.02% of all cache refs           (16.16%)
+            98,904      cpu_core/cache-misses/           #   13.37% of all cache refs           (83.84%)
+           970,240      cpu_atom/cache-references/                                              (16.16%)
+           739,760      cpu_core/cache-references/                                              (83.84%)
+
+       0.058614041 seconds time elapsed
+
+       0.052757000 seconds user
+       0.005972000 seconds sys
+    ```
+
+    Then, quicksort inplace:
+
+    ```bash
+    $ sudo perf stat -e cpu-cycles,cache-misses,cache-references python sorts.py
+
+    Performance counter stats for 'python sorts.py':
+
+        62,918,465      cpu_atom/cpu-cycles/                                                    (16.33%)
+        94,244,721      cpu_core/cpu-cycles/                                                    (83.67%)
+           538,798      cpu_atom/cache-misses/           #   73.44% of all cache refs           (16.33%)
+           112,033      cpu_core/cache-misses/           #   14.56% of all cache refs           (83.67%)
+           733,624      cpu_atom/cache-references/                                              (16.33%)
+           769,571      cpu_core/cache-references/                                              (83.67%)
+
+       0.052613109 seconds time elapsed
+
+       0.041142000 seconds user
+       0.011754000 seconds sys
+    ```
+
+    And finally, insertion sort:
+
+    ```bash
+    $ sudo perf stat -e cpu-cycles,cache-misses,cache-references python sorts.py
+
+    Performance counter stats for 'python sorts.py':
+
+        66,712,034      cpu_atom/cpu-cycles/                                                    (6.78%)
+        90,556,650      cpu_core/cpu-cycles/                                                    (93.22%)
+           760,342      cpu_atom/cache-misses/           #   76.94% of all cache refs           (6.78%)
+           117,254      cpu_core/cache-misses/           #   18.31% of all cache refs           (93.22%)
+           988,175      cpu_atom/cache-references/                                              (6.78%)
+           640,328      cpu_core/cache-references/                                              (93.22%)
+
+       0.049202230 seconds time elapsed
+
+       0.043021000 seconds user
+       0.006145000 seconds sys
+    ```
+
+    To calculate cache hits, we need to subtract the cache misses from cache references. There was no way to explicitly ask for a cache hit as a PMU event for `perf stat`.
+
