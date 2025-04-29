@@ -161,3 +161,48 @@
 
     To calculate cache hits, we need to subtract the cache misses from cache references. There was no way to explicitly ask for a cache hit as a PMU event for `perf stat`.
 
+    ---
+1. **Put the code into a file and make it executable. Install prerequisites: [`pycallgraph`](https://lewiscowles1986.github.io/py-call-graph/) and [`graphviz`](http://graphviz.org/). (If you can run `dot`, you already have GraphViz.) Run the code as is with `pycallgraph graphviz -- ./fib.py` and check the `pycallgraph.png` file. How many times is `fib0` called?. We can do better than that by memoizing the functions. Uncomment the commented lines and regenerate the images. How many times are we calling each `fibN` function now?**
+
+    Solution:
+    After running the command, the [`pycallgraph.png`](./pycallgraph.png) file is created, which shows that the `fib0` function is called 21 times.
+
+    Memoizing functions means to store the return value of a function when passed in the same arguments, which cuts down on computation and logic as we can simply return the previously calculated value. This is what the lines 11-13 do, and when we rerun the program, we can see the memoization take effect, as this time we only call the `fib0`, or really any `fibN` function, once.
+
+    ---
+1. **A common issue is that a port you want to listen on is already taken by another process. Let's learn how to discover that process pid. First execute `python -m http.server 4444` to start a minimal web server listening on port `4444`. On a separate terminal run `lsof | grep LISTEN` to print all listening processes and ports. Find that process pid and terminate it by running `kill <PID>`.**
+
+    Solution:\
+    ```bash
+    $ lsof | grep LISTEN | grep 4444
+    
+    ... excluded stdout of command
+    
+    $ kill 89534
+    ```
+
+    ---
+1. **Limiting a process's resources can be another handy tool in your toolbox.**
+**Try running `stress -c 3` and visualize the CPU consumption with `htop`. Now, execute `taskset --cpu-list 0,2 stress -c 3` and visualize it. Is `stress` taking three CPUs? Why not? Read [`man taskset`](https://www.man7.org/linux/man-pages/man1/taskset.1.html).**
+**Challenge: achieve the same using [`cgroups`](https://www.man7.org/linux/man-pages/man7/cgroups.7.html). Try limiting the memory consumption of `stress -m`.**
+
+    Solution:\
+    After running the `stress` command, in another tmux pane I had `htop` running, which showed 3 of my CPUs being hogged at once, often switching between which CPU was being hogged.
+
+    Then, after running the `taskset` command, followed by the `stress` command, this time I only saw two of my CPUs being hogged, specifically core 0 and 2. This is because the `taskset` command sets a the CPU's affinity to a certain process. When we execute the above command, it sets cores' 0 and 2 affinity to the stress command, and thus they are the only ones that run that command.
+    
+    - Now for the challenge of using `cgroups`. I will be using `cgroups v2`, where all mounted controllers reside in a single unified heirarchy. These are the following steps I took in order to limit the memory consumption of the `stress` command:
+
+    ```bash
+    $ sudo mkdir /sys/fs/cgroup/cgroup_test
+    $ cd /sys/fs/cgroup/cgroup_test
+    $ echo "+memory" | sudo tee ./cgroup.subtree_control
+    $ echo "200M" | sudo tee ./memory.high
+    ```
+
+    This sets up the `cgroup` to be ready for memory control, and designates the high limit of its processes to be 200M. Next, in another terminal, we can run the `stress -m 3` command, view its PID and then use its PID to move it into the `cgroup.procs` interface file. We can then use `htop` to watch its memory consumption be throttled.
+
+    ---
+1. **(Advanced) The command `curl ipinfo.io` performs a HTTP request and fetches information about your public IP. Open [Wireshark](https://www.wireshark.org/) and try to sniff the request and reply packets that `curl` sent and received. (Hint: Use the `http` filter to just watch HTTP packets).**
+
+    Skipped.
