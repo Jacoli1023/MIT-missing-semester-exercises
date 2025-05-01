@@ -9,4 +9,6 @@ I use Linux Ubuntu 24.04 LTS.
 [3. Editors (Vim)](./Lecture3/Lecture3.md)\
 [4. Data Wrangling](./Lecture4/Lecture4.md)\
 [5. Command-line Environment](./Lecture5/Lecture5.md)\
-[6. Version Control (Git)](./Lecture6/Lecture6.md)
+[6. Version Control (Git)](./Lecture6/Lecture6.md)\
+[7. Debugging and Profiling](./Lecture7/Lecture7.md)\
+[8. Metaprogramming](./Lecture8/Lecture8.md)\
