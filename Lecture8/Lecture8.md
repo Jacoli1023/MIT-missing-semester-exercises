@@ -13,7 +13,7 @@
     [here](https://www.gnu.org/software/make/manual/html_node/Standard-Targets.html#Standard-Targets).**
 
     Solution:\
-    [./Makefile](./Makefile):
+    [./Makefile](./Makefile)
     ```make
     paper.pdf: paper.tex plot-data.png
         pdflatex paper.tex
@@ -35,7 +35,7 @@
     with a use-case in which that particular kind of requirement makes
     sense.**
 
-    Solution:\
+    Solution:
     - caret (^): This type specifies a range of versions starting from the patch version, but does not exceed the minor version. This is useful if your system depends on a functionality introduced in "1.2.0", and, according to semantic versioning, any further patch will not change the behavior or interface. This is the default.
     - tilde (~): This allows more room for updates, depending on the versioning that comes after it. If you give the major, minor, and the patch, then it is the same as the caret, but if you only specify the major, then any minor versions can be used as well. Can be useful if your functionality only depends on the base major version, allowing any future updates won't affect the behavior of your system, and it keeps the dependency as up-to-date as possible.
     - wildcard (*): This allows for _any_ version where the wildcard specification is. This is not allowed in some build systems, but can be useful in certain scenarios where you're certain that any version where the wildcard is placed will work.
@@ -51,7 +51,7 @@
     command fails. This should prevent any commit from having an
     unbuildable version of the paper.**
 
-    Solution:\
+    Solution:
     ```bash
     #!/bin/sh
 
