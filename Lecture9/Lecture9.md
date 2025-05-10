@@ -111,4 +111,9 @@
     `git tag -s`. Verify the signature on the commit with `git show
     --show-signature` or on the tag with `git tag -v`.**
 
-    Solution:
+    Solution:\
+    After signing the Git commit and running the given command, I get the following line in my commit history, verifying my signature.
+
+    ```bash
+    gpg: Good signature from "Jacob Oliver <...>" [ultimate]
+    ```

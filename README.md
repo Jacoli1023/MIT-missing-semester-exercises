@@ -12,3 +12,4 @@ I use Linux Ubuntu 24.04 LTS.
 [6. Version Control (Git)](./Lecture6/Lecture6.md)\
 [7. Debugging and Profiling](./Lecture7/Lecture7.md)\
 [8. Metaprogramming](./Lecture8/Lecture8.md)\
+[9. Security and Cryptography](./Lecture9/Lecture9.md)
