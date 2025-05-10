@@ -54,6 +54,7 @@
 
     I am running on Linux, so I did not look for the `mac` or the `edu` files in my `sed` command. The `shasum --check` command reads the SHA sums from the input, and searches the directory for any file with a matching checksum.
 
+---
 ## Symmetric cryptography
 
 1. **Encrypt a file with AES encryption, using
@@ -71,3 +72,43 @@
     $ echo $?
     0
     ```
+
+---
+## Asymmetric cryptography
+
+1. **Set up [SSH
+    keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)
+    on a computer you have access to (not Athena, because Kerberos interacts
+    weirdly with SSH keys). Make sure
+    your private key is encrypted with a passphrase, so it is protected at
+    rest.**
+
+    Skipped, as I already have `ssh` set up on my computer.
+
+    ---
+1. **[Set up GPG](https://www.digitalocean.com/community/tutorials/how-to-use-gpg-to-encrypt-and-sign-messages)**
+
+    I also already have GPG set up.
+
+    ---
+1. **Send Anish an encrypted email ([public key](https://keybase.io/anish)).**
+
+    Solution:\
+    First we'd have to import Anish's public key, which can be done via this command:
+    ```bash
+    $ curl https://keybase.io/anish/pgp_keys.asc | gpg --import
+    ```
+
+    From there we can encrpyt and send a message to Anish using the following command:
+    ```bash
+    $ gpg --encrypt --sign --armor -r me@anishathalye.com top-secret-info.txt
+    ```
+
+    Unfortunately, Anish's public key expired in January, and I am unable to send my top secret encrypted message.
+
+    ---
+1. **Sign a Git commit with `git commit -S` or create a signed Git tag with
+    `git tag -s`. Verify the signature on the commit with `git show
+    --show-signature` or on the tag with `git tag -v`.**
+
+    Solution:
